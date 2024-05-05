@@ -1,16 +1,19 @@
-const quickSort = (arr) => {
-  if (arr.length <= 1) {
-    return arr;
-  }
-  const pivot = arr[arr.length - 1];
-  const left = [];
-  const right = [];
-  for (let i = 0; i < arr.length - 1; i++) {
-    if (arr[i] < pivot) {
-      left.push(arr[i]);
+function trap(height) {
+  let left = 0;
+  let right = height.length - 1;
+  let leftMax = 0;
+  let rightMax = 0;
+  let waterTrapped = 0;
+  while (left < right) {
+    if (height[left] < height[right]) {
+      if (height[left] >= leftMax) leftMax = height[left];
+      else waterTrapped += leftMax - height[left];
+      left++;
     } else {
-      right.push(arr[i]);
+      if (height[right] >= rightMax) rightMax = height[right];
+      else waterTrapped += rightMax - height[right];
+      right--;
     }
   }
-  return quickSort(left).concat(pivot, quickSort(right));
-};
+  return waterTrapped;
+}
