@@ -1,10 +1,15 @@
-function minimumTotal(triangle) {
-  const n = triangle.length;
-  const dp = new Array(n + 1).fill(0);
-  for (let i = n - 1; i >= 0; i--) {
-    for (let j = 0; j <= i; j++) {
-      dp[j] = triangle[i][j] + Math.min(dp[j], dp[j + 1]);
+function countSubstrings(s) {
+  let count = 0;
+  for (let i = 0; i < s.length; i++) {
+    extendPalindrome(i, i);
+    extendPalindrome(i, i + 1);
+  }
+  return count;
+  function extendPalindrome(left, right) {
+    while (left >= 0 && right < s.length && s[left] === s[right]) {
+      count++;
+      left--;
+      right++;
     }
   }
-  return dp[0];
 }
